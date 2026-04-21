@@ -1,0 +1,9 @@
+# Audit reports — peuvent contenir des infos sensibles
+audit/*.txt
+
+# Trivy cache
+.trivy/
+
+# Backup files
+*.bak
+*~
