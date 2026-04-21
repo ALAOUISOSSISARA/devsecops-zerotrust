@@ -1,9 +1,9 @@
-# Audit reports — peuvent contenir des infos sensibles
-audit/*.txt
+# Trivy reports — contiennent details des CVEs
+audit/trivy_*.txt
 
-# Trivy cache
-.trivy/
+# Garder les rapports Docker Bench
+# audit/docker-bench-*.txt  ← on NE met PAS cette ligne
 
 # Backup files
 *.bak
-*~
+
