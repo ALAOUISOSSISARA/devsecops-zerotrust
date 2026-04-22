@@ -38,16 +38,16 @@ resource "docker_container" "nginx_secure" {
   }
 
   # ── Resource Limits ─────────────────────────────────────
-  memory      = var.memory_limit
-  cpu_shares  = 512
-#  pids_limit  = var.pids_limit
+  memory     = var.memory_limit
+  cpu_shares = 512
+  #  pids_limit  = var.pids_limit
 
   # ── tmpfs — Writable zones in memory ────────────────────
   tmpfs = {
-    "/var/run/nginx"     = "rw,noexec,nosuid,size=10m,uid=${var.nginx_user_uid},gid=${var.nginx_user_gid}"
-    "/var/log/nginx"     = "rw,noexec,nosuid,size=10m,uid=${var.nginx_user_uid},gid=${var.nginx_user_gid}"
-    "/var/lib/nginx/tmp" = "rw,noexec,nosuid,size=10m,uid=${var.nginx_user_uid},gid=${var.nginx_user_gid}"
-    "/var/lib/nginx/logs"= "rw,noexec,nosuid,size=10m,uid=${var.nginx_user_uid},gid=${var.nginx_user_gid}"
+    "/var/run/nginx"      = "rw,noexec,nosuid,size=10m,uid=${var.nginx_user_uid},gid=${var.nginx_user_gid}"
+    "/var/log/nginx"      = "rw,noexec,nosuid,size=10m,uid=${var.nginx_user_uid},gid=${var.nginx_user_gid}"
+    "/var/lib/nginx/tmp"  = "rw,noexec,nosuid,size=10m,uid=${var.nginx_user_uid},gid=${var.nginx_user_gid}"
+    "/var/lib/nginx/logs" = "rw,noexec,nosuid,size=10m,uid=${var.nginx_user_uid},gid=${var.nginx_user_gid}"
   }
 
   # ── Labels ──────────────────────────────────────────────

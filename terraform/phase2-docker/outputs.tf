@@ -26,11 +26,11 @@ output "nginx_url" {
 output "security_summary" {
   description = "Security configuration summary"
   value = {
-    image          = var.nginx_image
-    read_only      = true
-    cap_drop       = "ALL"
-    memory_limit   = "${var.memory_limit}MB"
-    pids_limit     = var.pids_limit
-    no_new_privs   = true
+    image        = var.nginx_image
+    read_only    = true
+    cap_drop     = "ALL"
+    memory_limit = "${var.memory_limit}MB"
+    pids_limit   = var.pids_limit
+    no_new_privs = true
   }
 }
