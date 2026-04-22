@@ -16,7 +16,7 @@ learning every detail of each component.
 | Phase | Topic | Status |
 |-------|-------|--------|
 | Phase 1 | Docker Hardening | Complete |
-| Phase 2 | Infrastructure as Code (Terraform) | Upcoming |
+| Phase 2 | Infrastructure as Code (Terraform) | Complete |
 | Phase 3 | CI/CD Pipeline Security (GitHub Actions) | Upcoming |
 | Phase 4 | Security Scanning Automation | Upcoming |
 | Phase 5 | Secrets Management (Vault) | Upcoming |
@@ -90,3 +90,26 @@ learning every detail of each component.
 - 0 CVEs — verified with Trivy 0.70.0
 - Security headers — X-Frame-Options, X-Content-Type-Options, X-XSS-Protection
 - server_tokens off — no
+## Phase 2 — Terraform Summary
+
+### Provider
+- kreuzwerker/docker v3.9.0
+- Rootless socket — unix:///run/user/1000/docker.sock
+
+### Infrastructure as Code
+- nginx-hardened:1.2 deployed via Terraform
+- Same Zero Trust config as Phase 1 — now versioned and reproducible
+- terraform plan — review before every change
+- terraform apply — idempotent deployment
+
+### Files
+- providers.tf — Docker provider configuration
+- variables.tf — configurable parameters
+- main.tf — container resource definition
+- outputs.tf — security summary after deploy
+
+### Key Concepts Learned
+- Declarative vs imperative infrastructure
+- Idempotence — same result every time
+- Terraform state — memory of what exists
+- tfstate excluded from Git — contains sensitive data
