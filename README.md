@@ -18,10 +18,11 @@ learning every detail of each component.
 | Phase 1 | Docker Hardening | Complete |
 | Phase 2 | Infrastructure as Code (Terraform) | Complete |
 | Phase 3 | CI/CD Pipeline Security (GitHub Actions) | Complete |
-| Phase 4 | Security Scanning Automation | Upcoming |
-| Phase 5 | Secrets Management (Vault) | Upcoming |
-| Phase 6 | Monitoring and Compliance | Upcoming |
-| Phase 7 | AWS Deployment | Upcoming |
+| Phase 4 | Jenkins Local Pipeline (Blue Ocean) | Upcoming |
+| Phase 5 | Secrets Management (HashiCorp Vault) | Upcoming |
+| Phase 6 | AWS Free Tier Deployment (EC2, S3, IAM) | Upcoming |
+| Phase 7 | Monitoring and Alerting (Prometheus, Grafana) | Upcoming |
+| Phase 8 | Compliance and Audit (OpenSCAP, CIS Benchmark) | Upcoming |
 
 ## Zero Trust Principles Applied
 
