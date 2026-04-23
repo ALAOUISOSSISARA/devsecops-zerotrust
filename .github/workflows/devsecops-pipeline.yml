@@ -93,3 +93,60 @@ jobs:
       - name: Terraform Format Check
         run: terraform fmt -check
         working-directory: ./terraform/phase2-docker
+
+# ─────────────────────────────────────────────────────────────
+# JOB 4 — Semgrep SAST (Static Analysis)
+# ─────────────────────────────────────────────────────────────
+  semgrep:
+    name: Semgrep SAST Scan
+    runs-on: ubuntu-latest
+    needs: terraform-validate
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run Semgrep
+        uses: returntocorp/semgrep-action@v1
+        with:
+          config: >-
+            p/dockerfile
+            p/terraform
+            p/secrets
+
+# ─────────────────────────────────────────────────────────────
+# JOB 5 — Gitleaks (Secrets Detection)
+# ─────────────────────────────────────────────────────────────
+  gitleaks:
+    name: Gitleaks Secrets Scan
+    runs-on: ubuntu-latest
+    needs: semgrep
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run Gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+# ─────────────────────────────────────────────────────────────
+# JOB 6 — OPA/Conftest (Policy as Code)
+# ─────────────────────────────────────────────────────────────
+  conftest:
+    name: OPA Conftest Policy Check
+    runs-on: ubuntu-latest
+    needs: gitleaks
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Conftest
+        run: |
+          wget https://github.com/open-policy-agent/conftest/releases/download/v0.46.0/conftest_0.46.0_Linux_x86_64.tar.gz
+          tar xzf conftest_0.46.0_Linux_x86_64.tar.gz
+          sudo mv conftest /usr/local/bin/
+
+      - name: Run Conftest on Terraform
+        run: conftest test terraform/phase2-docker/main.tf --policy policy/
